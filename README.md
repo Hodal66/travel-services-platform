@@ -26,7 +26,7 @@ Before you begin, ensure you have the following installed:
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone [<repository-url>](https://github.com/Hodal66/travel-services-platform)
 cd travel-services-platform
 ```
 
