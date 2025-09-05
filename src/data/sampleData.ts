@@ -1,14 +1,12 @@
-import type { Car, Property, Hotel, Transfer, Tour, Service } from '../types';
-import { Car as CarIcon, Home, Hotel as HotelIcon, Plane, MapPin } from 'lucide-react';
-import React from 'react';
+import { Car, Property, Hotel, Transfer, Tour, Service } from '../types';
 
-// Services Configuration
+// Services Configuration (without React components)
 export const services: Service[] = [
   {
     id: 'cars',
     title: 'Car Rentals',
     description: 'Rent premium vehicles for your journey',
-    icon: React.createElement(CarIcon, { className: 'w-8 h-8' }),
+    icon: null, // We'll handle this in the component
     path: '/cars',
     color: 'from-blue-500 to-cyan-500'
   },
@@ -16,7 +14,7 @@ export const services: Service[] = [
     id: 'properties',
     title: 'Real Estate',
     description: 'Find your perfect property',
-    icon: React.createElement(Home, { className: 'w-8 h-8' }),
+    icon: null,
     path: '/properties',
     color: 'from-green-500 to-emerald-500'
   },
@@ -24,7 +22,7 @@ export const services: Service[] = [
     id: 'hotels',
     title: 'Hotels',
     description: 'Book comfortable accommodations',
-    icon: React.createElement(HotelIcon, { className: 'w-8 h-8' }),
+    icon: null,
     path: '/hotels',
     color: 'from-purple-500 to-pink-500'
   },
@@ -32,7 +30,7 @@ export const services: Service[] = [
     id: 'transfers',
     title: 'Airport Transfers',
     description: 'Reliable airport transportation',
-    icon: React.createElement(Plane, { className: 'w-8 h-8' }),
+    icon: null,
     path: '/transfers',
     color: 'from-orange-500 to-red-500'
   },
@@ -40,7 +38,7 @@ export const services: Service[] = [
     id: 'tours',
     title: 'Tours',
     description: 'Discover amazing experiences',
-    icon: React.createElement(MapPin, { className: 'w-8 h-8' }),
+    icon: null,
     path: '/tours',
     color: 'from-indigo-500 to-purple-500'
   }
@@ -392,7 +390,7 @@ export const sampleTransfers: Transfer[] = [
   },
   {
     id: 'transfer-6',
-     vehicleType: 'Bus Transfer',
+    vehicleType: 'Bus Transfer',
     capacity: 12,
     pricePerKm: 3.5,
     basePrice: 30,

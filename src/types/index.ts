@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Common types
 export interface Service {
   id: string;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: React.ReactNode | null;
   path: string;
   color: string;
 }
@@ -23,6 +22,7 @@ export interface Car {
   seats: number;
   image: string;
   rating: number;
+  description?: string;
   available: boolean;
   location?: string;
 }

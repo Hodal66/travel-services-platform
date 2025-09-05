@@ -1,19 +1,39 @@
-
 import React, { useState } from 'react';
-import { Search, ChevronRight, Star, TrendingUp, Shield, Clock } from 'lucide-react';
-import type { PageType } from '../types';
-import { services } from '../data/sampleData';
+import { Link } from 'react-router-dom';
+import { 
+  Search, ChevronRight, Star, TrendingUp, Shield, Clock,
+  Car, Home, Hotel, Plane, MapPin 
+} from 'lucide-react';
+// Fixed import path - use one of these depending on your preference:
+import { services } from '../data/sampleData';  // Relative path from src/pages/home/
+// OR use the path mapping:
+// import { services } from '@/data/sampleData';
 
-interface HomePageProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
     // Implement search logic here
     console.log('Searching for:', searchQuery);
+  };
+
+  // Icon mapping function
+  const getServiceIcon = (serviceId: string) => {
+    const iconProps = { className: 'w-8 h-8' };
+    switch (serviceId) {
+      case 'cars':
+        return <Car {...iconProps} />;
+      case 'properties':
+        return <Home {...iconProps} />;
+      case 'hotels':
+        return <Hotel {...iconProps} />;
+      case 'transfers':
+        return <Plane {...iconProps} />;
+      case 'tours':
+        return <MapPin {...iconProps} />;
+      default:
+        return <Star {...iconProps} />;
+    }
   };
 
   return (
@@ -63,18 +83,18 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
             {/* Quick Action Buttons */}
             <div className="flex flex-wrap justify-center gap-4">
-              <button 
-                onClick={() => onNavigate('cars')}
+              <Link 
+                to="/cars"
                 className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-6 py-3 rounded-lg transition-all duration-300 flex items-center"
               >
                 Rent a Car <ChevronRight className="w-4 h-4 ml-2" />
-              </button>
-              <button 
-                onClick={() => onNavigate('hotels')}
+              </Link>
+              <Link 
+                to="/hotels"
                 className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-6 py-3 rounded-lg transition-all duration-300 flex items-center"
               >
                 Book Hotel <ChevronRight className="w-4 h-4 ml-2" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -94,16 +114,16 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div
+              <Link
                 key={service.id}
-                onClick={() => onNavigate(service.id as PageType)}
+                to={`/${service.id}`}
                 className="group cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`h-2 bg-gradient-to-r ${service.color}`}></div>
                 <div className="p-8">
                   <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${service.color} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    {service.icon}
+                    {getServiceIcon(service.id)}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                     {service.title}
@@ -116,7 +136,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -235,6 +255,27 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
                   JS
+                </div>
+                <div className="ml-3">
+                  <p className="font-semibold text-gray-900">John Smith</p>
+                  <p className="text-gray-500 text-sm">Verified Customer</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-lg">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-6 italic">
+                "Found my dream apartment through their real estate service. The process was smooth 
+                and the team was incredibly helpful throughout."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+                  MJ
                 </div>
                 <div className="ml-3">
                   <p className="font-semibold text-gray-900">Maria Johnson</p>

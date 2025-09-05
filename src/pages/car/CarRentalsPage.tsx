@@ -1,8 +1,10 @@
-/* eslint-disable prefer-const */
+// /* eslint-disable prefer-const */
+
 import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Star, Users, Fuel, Settings, Filter, SortDesc } from 'lucide-react';
-import type { Car, CarFilters } from '../types';
-import { sampleCars } from '../data/sampleData';
+import type { Car, CarFilters } from '../../types';
+import { sampleCars } from '../../data/sampleData';
 
 const CarRentalsPage: React.FC = () => {
   const [filters, setFilters] = useState<CarFilters>({});
@@ -109,16 +111,24 @@ const CarRentalsPage: React.FC = () => {
             <span className="text-3xl font-bold text-blue-600">${car.pricePerDay}</span>
             <span className="text-gray-600 ml-1">/day</span>
           </div>
-          <button 
-            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-              car.available 
-                ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-            disabled={!car.available}
-          >
-            {car.available ? 'Book Now' : 'Unavailable'}
-          </button>
+          <div className="flex gap-2">
+            <Link 
+              to={`/cars/${car.id}`}
+              className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg font-medium transition-colors hover:bg-blue-50"
+            >
+              View Details
+            </Link>
+            <button 
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                car.available 
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+              disabled={!car.available}
+            >
+              {car.available ? 'Book Now' : 'Unavailable'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
