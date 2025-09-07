@@ -57,8 +57,13 @@ import ToursPage from './pages/tour/ToursPage';
 import TransferDetailPage from './pages/transfer/TransferDetailPage';
 import TourDetailPage from './pages/tour/TourDetailPage';
 import Layout from './components/common/Layout';
-import { PageType } from './types';
 import HotelsPage from './pages/hotel/HotelPage';
+import CarDetailPage from './pages/car/CarDetailPage';
+import HotelDetailPage from './pages/hotel/HotelDetailPage';
+import PropertyDetailPage from './pages/real_estate/PropertyDetailPage';
+// import PropertyDetailPage from './pages/real_estate/PropertyDetailPage';
+// import HotelDetailPage from './pages/hotel/HotelDetailPage';
+// import { Car } from 'lucide-react';
 
 function App() {
   return (
@@ -78,9 +83,7 @@ function App() {
         <Routes>
           {/* Routes with Header and Footer */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage onNavigate={function (page: PageType): void {
-              throw new Error('Function not implemented.');
-            } } />} />
+            <Route index element={<HomePage />} />
             <Route path="cars" element={<CarRentalsPage />} />
             <Route path="properties" element={<RealEstatePage />} />
             <Route path="hotels" element={<HotelsPage />} />
@@ -89,16 +92,14 @@ function App() {
           </Route>
 
           {/* Detail routes without Header and Footer */}
-          {/* <Route path="/cars/:id" element={<CarDetailPage />} />
+          <Route path="/cars/:id" element={<CarDetailPage />} />
           <Route path="/properties/:id" element={<PropertyDetailPage />} />
-          <Route path="/hotels/:id" element={<HotelDetailPage />} /> */}
+          <Route path="hotels/:id" element={<HotelDetailPage />} /> 
           <Route path="/transfers/:id" element={<TransferDetailPage />} />
           <Route path="/tours/:id" element={<TourDetailPage />} />
           
           {/* Catch all route - redirect to home */}
-          <Route path="*" element={<HomePage onNavigate={function (page: PageType): void {
-            throw new Error('Function not implemented.');
-          } } />} />
+          <Route path="*" element={<HomePage/>} />
         </Routes>
       </div>
     </Router>

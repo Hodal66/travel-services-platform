@@ -483,13 +483,10 @@ const HotelsPage: React.FC<HotelsPageProps> = () => {
           <div className="flex gap-2">
             <Link 
               to={`/hotels/${hotel.id}`}
-              className="px-4 py-2 border border-purple-600 text-purple-600 rounded-lg font-medium transition-colors hover:bg-purple-50"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               View Details
             </Link>
-            <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-              Book Now
-            </button>
           </div>
         </div>
       </div>

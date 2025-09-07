@@ -5,7 +5,7 @@ import {
   Car, Home, Hotel, Plane, MapPin 
 } from 'lucide-react';
 // Fixed import path - use one of these depending on your preference:
-import { services } from '../data/sampleData';  // Relative path from src/pages/home/
+import { services } from '@/data/sampleData';  // Relative path from src/pages/home/
 // OR use the path mapping:
 // import { services } from '@/data/sampleData';
 

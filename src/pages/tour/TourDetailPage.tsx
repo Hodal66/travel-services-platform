@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Star, Clock, Users, Mountain, ChevronLeft, ChevronRight,
-  Calendar, MapPin, Phone, Mail, Check, Shield, Camera
+  Calendar, MapPin, Phone, Mail, Check, Shield
 } from 'lucide-react';
 import type { Tour } from '../../types';
 import { sampleTours } from '../../data/sampleData';
@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 const TourDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [tour, setTour] = useState<Tour | null>(null);
+  const [tour, setTour] = useState<Tour >();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [bookingDetails, setBookingDetails] = useState({
     date: '',
@@ -122,10 +122,7 @@ const TourDetailPage: React.FC = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
             <div className="flex-1">
               <div className="flex items-center mb-2">
-                <div className="flex items-center mr-4">
-                  {getCategoryIcon(tour.category)}
-                  <span className="ml-1 text-sm font-semibold text-gray-700">{tour.category}</span>
-                </div>
+              
                 <div className="flex items-center">
                   <Star className="w-5 h-5 text-yellow-400 fill-current mr-1" />
                   <span className="text-lg font-medium">{tour.rating}</span>
@@ -250,13 +247,13 @@ const TourDetailPage: React.FC = () => {
 
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  {tour.description || `Join us for an unforgettable ${tour.category.toLowerCase()} experience with our ${tour.title}. 
-                  This ${tour.difficulty.toLowerCase()} level tour is perfect for those looking to explore and discover new adventures 
+                  {tour.description || `Join us for an unforgettable ${tour.category} experience with our ${tour.title}. 
+                  This ${tour.difficulty} level tour is perfect for those looking to explore and discover new adventures 
                   over the course of ${tour.duration}.`}
                 </p>
                 <p className="text-gray-600 leading-relaxed">
                   Our experienced guides will lead you through carefully selected locations, ensuring you get the most out of your 
-                  {tour.duration} journey. With a maximum group size of {tour.groupSize} participants, you'll enjoy a personalized 
+                  {tour.duration} journey. With a maximum group size  participants, you'll enjoy a personalized 
                   and intimate experience that larger tours simply cannot provide.
                 </p>
               </div>
@@ -293,7 +290,7 @@ const TourDetailPage: React.FC = () => {
             )}
 
             {/* Itinerary */}
-            {tour.schedule && tour.schedule.length > 0 && (
+            {/* {tour.schedule && (
               <div className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Detailed Itinerary</h2>
                 
@@ -310,7 +307,7 @@ const TourDetailPage: React.FC = () => {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
 
             {/* Important Information */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
@@ -393,9 +390,9 @@ const TourDetailPage: React.FC = () => {
                       onChange={(e) => setBookingDetails({...bookingDetails, participants: Number(e.target.value)})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
-                      {Array.from({length: tour.groupSize}, (_, i) => i + 1).map(num => (
+                      {/* {Array.from({length: tour.groupSize}, (_, i) => i + 1).map(num => (
                         <option key={num} value={num}>{num} participant{num > 1 ? 's' : ''}</option>
-                      ))}
+                      ))} */}
                     </select>
                   </div>
                   
