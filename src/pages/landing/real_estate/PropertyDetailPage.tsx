@@ -1,20 +1,35 @@
-import React from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Star, Bed, Bath, Square, MapPin, Phone, Mail, User, Shield } from 'lucide-react';
-import { sampleProperties } from '@/data/sampleData';
+import React from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  Star,
+  Bed,
+  Bath,
+  Square,
+  MapPin,
+  Phone,
+  Mail,
+  User,
+  Shield,
+} from "lucide-react";
+import { sampleProperties } from "@/data/sampleData";
 
 const PropertyDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
-  const property = sampleProperties.find(p => p.id === id);
+
+  const property = sampleProperties.find((p) => p.id === id);
 
   if (!property) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Property Not Found</h2>
-          <p className="text-gray-600 mb-6">The property you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Property Not Found
+          </h2>
+          <p className="text-gray-600 mb-6">
+            The property you're looking for doesn't exist.
+          </p>
           <Link
             to="/properties"
             className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200"
@@ -35,10 +50,11 @@ const PropertyDetailPage: React.FC = () => {
     } else {
       return `$${price}`;
     }
+    console.log(listingType)
   };
 
   const handleContact = () => {
-    alert('Contact functionality will be implemented with backend integration');
+    alert("Contact functionality will be implemented with backend integration");
   };
 
   return (
@@ -76,13 +92,17 @@ const PropertyDetailPage: React.FC = () => {
                 <div className="text-right">
                   <div className="flex items-center mb-2">
                     <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                    <span className="text-lg font-semibold ml-1">{property.rating}</span>
+                    <span className="text-lg font-semibold ml-1">
+                      {property.rating}
+                    </span>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                    property.listingType === 'Sale' 
-                      ? 'bg-blue-100 text-blue-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      property.listingType === "Sale"
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-green-100 text-green-800"
+                    }`}
+                  >
                     For {property.listingType}
                   </span>
                 </div>
@@ -98,14 +118,15 @@ const PropertyDetailPage: React.FC = () => {
                       </span>
                     </div>
                     <p className="text-white font-semibold text-xl">
-                      {property.type} • {property.bedrooms} Bed • {property.bathrooms} Bath
+                      {property.type} • {property.bedrooms} Bed •{" "}
+                      {property.bathrooms} Bath
                     </p>
                   </div>
                 </div>
                 <div className="absolute top-4 right-4">
                   <span className="bg-white/90 text-gray-800 px-3 py-2 rounded-full font-bold">
                     {formatPrice(property.price, property.listingType)}
-                    {property.listingType === 'Rent' && '/mo'}
+                    {property.listingType === "Rent" && "/mo"}
                   </span>
                 </div>
               </div>
@@ -139,7 +160,9 @@ const PropertyDetailPage: React.FC = () => {
 
               {/* Features */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">Features & Amenities</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Features & Amenities
+                </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {property.features.map((feature, index) => (
                     <div key={index} className="flex items-center">
@@ -161,7 +184,9 @@ const PropertyDetailPage: React.FC = () => {
                 </div>
                 <div className="flex justify-between py-2 border-b border-gray-200">
                   <span className="text-gray-600">Listing Type</span>
-                  <span className="font-medium">For {property.listingType}</span>
+                  <span className="font-medium">
+                    For {property.listingType}
+                  </span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-gray-200">
                   <span className="text-gray-600">Bedrooms</span>
@@ -191,7 +216,9 @@ const PropertyDetailPage: React.FC = () => {
                   {formatPrice(property.price, property.listingType)}
                 </div>
                 <div className="text-gray-600">
-                  {property.listingType === 'Rent' ? 'per month' : 'total price'}
+                  {property.listingType === "Rent"
+                    ? "per month"
+                    : "total price"}
                 </div>
               </div>
 
@@ -204,7 +231,9 @@ const PropertyDetailPage: React.FC = () => {
                   </div>
                   <div>
                     <div className="font-semibold">{property.agent.name}</div>
-                    <div className="text-sm text-gray-600">Real Estate Agent</div>
+                    <div className="text-sm text-gray-600">
+                      Real Estate Agent
+                    </div>
                   </div>
                 </div>
 
@@ -275,7 +304,7 @@ const PropertyDetailPage: React.FC = () => {
                 >
                   Send Message
                 </button>
-                
+
                 <button className="w-full flex items-center justify-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold">
                   <Phone className="mr-2 h-4 w-4" />
                   Call Agent
@@ -288,8 +317,12 @@ const PropertyDetailPage: React.FC = () => {
 
               {/* Additional Info */}
               <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-                <p className="text-sm text-gray-600 mb-2">Need financing help?</p>
-                <p className="text-sm font-semibold text-green-600">Get pre-approved today</p>
+                <p className="text-sm text-gray-600 mb-2">
+                  Need financing help?
+                </p>
+                <p className="text-sm font-semibold text-green-600">
+                  Get pre-approved today
+                </p>
               </div>
             </div>
           </div>

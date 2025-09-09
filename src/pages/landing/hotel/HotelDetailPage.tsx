@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Star, MapPin, Clock, Users, Calendar, Phone, Shield, Wifi, Car, Utensils, Waves, ChevronLeft, ChevronRight } from 'lucide-react';
-import { sampleHotels } from '../../data/sampleData';
+import { sampleHotels } from '@/data/sampleData';
 
 const HotelDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

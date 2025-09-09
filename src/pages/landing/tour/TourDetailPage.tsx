@@ -1,31 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
-  Star, Clock, Users, Mountain, ChevronLeft, ChevronRight,
-  Calendar, MapPin, Phone, Mail, Check, Shield
-} from 'lucide-react';
-import type { Tour } from '../../types';
-import { sampleTours } from '../../data/sampleData';
-import toast from 'react-hot-toast';
+  Star,
+  Clock,
+  Users,
+  Mountain,
+  ChevronLeft,
+  ChevronRight,
+  Phone,
+  Mail,
+  Check,
+  Shield,
+} from "lucide-react";
+import type { Tour } from "@/types";
+import { sampleTours } from "@/data/sampleData";
+import toast from "react-hot-toast";
 
 const TourDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [tour, setTour] = useState<Tour >();
+  const [tour, setTour] = useState<Tour>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [bookingDetails, setBookingDetails] = useState({
-    date: '',
+    date: "",
     participants: 1,
-    specialRequests: ''
+    specialRequests: "",
   });
 
   useEffect(() => {
-    const foundTour = sampleTours.find(t => t.id === id);
+    const foundTour = sampleTours.find((t) => t.id === id);
     if (foundTour) {
       setTour(foundTour);
     } else {
-      toast.error('Tour not found');
-      navigate('/tours');
+      toast.error("Tour not found");
+      navigate("/tours");
     }
   }, [id, navigate]);
 
@@ -41,7 +49,7 @@ const TourDetailPage: React.FC = () => {
   }
 
   const handleBack = () => {
-    navigate('/tours');
+    navigate("/tours");
   };
 
   const handleBook = () => {
@@ -55,16 +63,16 @@ const TourDetailPage: React.FC = () => {
     `${tour.image}&hue=30`,
     `${tour.image}&sat=25`,
     `${tour.image}&contrast=20`,
-    `${tour.image}&brightness=-10`
+    `${tour.image}&brightness=-10`,
   ];
 
   const imageLabels = [
-    'Main Attraction',
-    'Scenic Views',
-    'Group Activity',
-    'Local Culture',
-    'Adventure Moments',
-    'Beautiful Landscapes'
+    "Main Attraction",
+    "Scenic Views",
+    "Group Activity",
+    "Local Culture",
+    "Adventure Moments",
+    "Beautiful Landscapes",
   ];
 
   const nextImage = () => {
@@ -72,34 +80,21 @@ const TourDetailPage: React.FC = () => {
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + tourImages.length) % tourImages.length);
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + tourImages.length) % tourImages.length
+    );
   };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Easy':
-        return 'bg-green-100 text-green-800';
-      case 'Moderate':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'Challenging':
-        return 'bg-red-100 text-red-800';
+      case "Easy":
+        return "bg-green-100 text-green-800";
+      case "Moderate":
+        return "bg-yellow-100 text-yellow-800";
+      case "Challenging":
+        return "bg-red-100 text-red-800";
       default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'Adventure':
-        return <Mountain className="w-4 h-4" />;
-      case 'Cultural':
-        return <Star className="w-4 h-4" />;
-      case 'Nature':
-        return <MapPin className="w-4 h-4" />;
-      case 'Food':
-        return <Calendar className="w-4 h-4" />;
-      default:
-        return <MapPin className="w-4 h-4" />;
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -122,18 +117,17 @@ const TourDetailPage: React.FC = () => {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
             <div className="flex-1">
               <div className="flex items-center mb-2">
-              
                 <div className="flex items-center">
                   <Star className="w-5 h-5 text-yellow-400 fill-current mr-1" />
                   <span className="text-lg font-medium">{tour.rating}</span>
                   <span className="text-gray-600 ml-2">(156 reviews)</span>
                 </div>
               </div>
-              
+
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 {tour.title}
               </h1>
-              
+
               <div className="flex items-center space-x-6 text-gray-600 mb-4">
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-1" />
@@ -143,12 +137,16 @@ const TourDetailPage: React.FC = () => {
                   <Users className="w-4 h-4 mr-1" />
                   <span>Max {tour.groupSize} people</span>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(tour.difficulty)}`}>
+                <span
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(
+                    tour.difficulty
+                  )}`}
+                >
                   {tour.difficulty}
                 </span>
               </div>
             </div>
-            
+
             <div className="mt-4 lg:mt-0 lg:ml-8 text-right">
               <div className="text-3xl font-bold text-indigo-600">
                 ${tour.price}
@@ -171,7 +169,7 @@ const TourDetailPage: React.FC = () => {
                   alt={`${tour.title} - ${imageLabels[currentImageIndex]}`}
                   className="w-full h-96 object-cover"
                 />
-                
+
                 <button
                   onClick={prevImage}
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all"
@@ -201,7 +199,9 @@ const TourDetailPage: React.FC = () => {
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
                       className={`flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                        index === currentImageIndex ? 'border-indigo-500' : 'border-gray-200'
+                        index === currentImageIndex
+                          ? "border-indigo-500"
+                          : "border-gray-200"
                       }`}
                     >
                       <img
@@ -217,57 +217,77 @@ const TourDetailPage: React.FC = () => {
 
             {/* Tour Overview */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Tour Overview</h2>
-              
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Tour Overview
+              </h2>
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <Clock className="w-8 h-8 text-indigo-600 mx-auto mb-2" />
-                  <div className="font-semibold text-gray-900">{tour.duration}</div>
+                  <div className="font-semibold text-gray-900">
+                    {tour.duration}
+                  </div>
                   <div className="text-sm text-gray-600">Duration</div>
                 </div>
-                
+
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <Users className="w-8 h-8 text-indigo-600 mx-auto mb-2" />
-                  <div className="font-semibold text-gray-900">{tour.groupSize}</div>
+                  <div className="font-semibold text-gray-900">
+                    {tour.groupSize}
+                  </div>
                   <div className="text-sm text-gray-600">Max Group Size</div>
                 </div>
-                
+
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <Mountain className="w-8 h-8 text-indigo-600 mx-auto mb-2" />
-                  <div className="font-semibold text-gray-900">{tour.difficulty}</div>
+                  <div className="font-semibold text-gray-900">
+                    {tour.difficulty}
+                  </div>
                   <div className="text-sm text-gray-600">Difficulty</div>
                 </div>
-                
+
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
                   <Star className="w-8 h-8 text-indigo-600 mx-auto mb-2" />
-                  <div className="font-semibold text-gray-900">{tour.category}</div>
+                  <div className="font-semibold text-gray-900">
+                    {tour.category}
+                  </div>
                   <div className="text-sm text-gray-600">Category</div>
                 </div>
               </div>
 
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-600 leading-relaxed mb-4">
-                  {tour.description || `Join us for an unforgettable ${tour.category} experience with our ${tour.title}. 
+                  {tour.description ||
+                    `Join us for an unforgettable ${tour.category} experience with our ${tour.title}. 
                   This ${tour.difficulty} level tour is perfect for those looking to explore and discover new adventures 
                   over the course of ${tour.duration}.`}
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Our experienced guides will lead you through carefully selected locations, ensuring you get the most out of your 
-                  {tour.duration} journey. With a maximum group size  participants, you'll enjoy a personalized 
-                  and intimate experience that larger tours simply cannot provide.
+                  Our experienced guides will lead you through carefully
+                  selected locations, ensuring you get the most out of your
+                  {tour.duration} journey. With a maximum group size
+                  participants, you'll enjoy a personalized and intimate
+                  experience that larger tours simply cannot provide.
                 </p>
               </div>
             </div>
 
             {/* Tour Highlights */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Tour Highlights</h2>
-              
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Tour Highlights
+              </h2>
+
               <div className="space-y-3">
                 {tour.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center p-3 bg-indigo-50 rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center p-3 bg-indigo-50 rounded-lg"
+                  >
                     <div className="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
-                    <span className="text-gray-900 font-medium">{highlight}</span>
+                    <span className="text-gray-900 font-medium">
+                      {highlight}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -276,11 +296,16 @@ const TourDetailPage: React.FC = () => {
             {/* Included Services */}
             {tour.included && tour.included.length > 0 && (
               <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Included</h2>
-                
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  What's Included
+                </h2>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {tour.included.map((item, index) => (
-                    <div key={index} className="flex items-center p-3 bg-green-50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center p-3 bg-green-50 rounded-lg"
+                    >
                       <Check className="w-4 h-4 text-green-600 mr-3" />
                       <span className="text-gray-900 font-medium">{item}</span>
                     </div>
@@ -311,11 +336,15 @@ const TourDetailPage: React.FC = () => {
 
             {/* Important Information */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Important Information</h2>
-              
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Important Information
+              </h2>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">What to Bring</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">
+                    What to Bring
+                  </h3>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-center">
                       <Check className="w-4 h-4 text-green-500 mr-2" />
@@ -335,9 +364,11 @@ const TourDetailPage: React.FC = () => {
                     </li>
                   </ul>
                 </div>
-                
+
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Tour Policies</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">
+                    Tour Policies
+                  </h3>
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-center">
                       <Check className="w-4 h-4 text-green-500 mr-2" />
@@ -366,8 +397,10 @@ const TourDetailPage: React.FC = () => {
             <div className="sticky top-8 space-y-6">
               {/* Booking Form */}
               <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Book This Tour</h3>
-                
+                <h3 className="text-xl font-bold text-gray-900 mb-6">
+                  Book This Tour
+                </h3>
+
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -376,18 +409,28 @@ const TourDetailPage: React.FC = () => {
                     <input
                       type="date"
                       value={bookingDetails.date}
-                      onChange={(e) => setBookingDetails({...bookingDetails, date: e.target.value})}
+                      onChange={(e) =>
+                        setBookingDetails({
+                          ...bookingDetails,
+                          date: e.target.value,
+                        })
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Number of Participants
                     </label>
                     <select
                       value={bookingDetails.participants}
-                      onChange={(e) => setBookingDetails({...bookingDetails, participants: Number(e.target.value)})}
+                      onChange={(e) =>
+                        setBookingDetails({
+                          ...bookingDetails,
+                          participants: Number(e.target.value),
+                        })
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
                       {/* {Array.from({length: tour.groupSize}, (_, i) => i + 1).map(num => (
@@ -395,7 +438,7 @@ const TourDetailPage: React.FC = () => {
                       ))} */}
                     </select>
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Special Requests
@@ -404,7 +447,12 @@ const TourDetailPage: React.FC = () => {
                       rows={3}
                       placeholder="Any dietary restrictions, accessibility needs, or special requests..."
                       value={bookingDetails.specialRequests}
-                      onChange={(e) => setBookingDetails({...bookingDetails, specialRequests: e.target.value})}
+                      onChange={(e) =>
+                        setBookingDetails({
+                          ...bookingDetails,
+                          specialRequests: e.target.value,
+                        })
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     ></textarea>
                   </div>
@@ -415,13 +463,18 @@ const TourDetailPage: React.FC = () => {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">
-                        ${tour.price} × {bookingDetails.participants} participant{bookingDetails.participants > 1 ? 's' : ''}
+                        ${tour.price} × {bookingDetails.participants}{" "}
+                        participant{bookingDetails.participants > 1 ? "s" : ""}
                       </span>
-                      <span className="font-medium">${calculateTotalPrice()}</span>
+                      <span className="font-medium">
+                        ${calculateTotalPrice()}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Service fee</span>
-                      <span className="font-medium">${Math.round(calculateTotalPrice() * 0.05)}</span>
+                      <span className="font-medium">
+                        ${Math.round(calculateTotalPrice() * 0.05)}
+                      </span>
                     </div>
                     <div className="border-t border-gray-200 pt-2">
                       <div className="flex justify-between text-lg font-bold">
@@ -440,7 +493,7 @@ const TourDetailPage: React.FC = () => {
                 >
                   Book Tour
                 </button>
-                
+
                 <p className="text-xs text-gray-500 text-center mt-4">
                   Free cancellation up to 24 hours before tour starts
                 </p>
@@ -465,7 +518,9 @@ const TourDetailPage: React.FC = () => {
               <div className="bg-white rounded-2xl shadow-lg p-6">
                 <div className="flex items-center mb-4">
                   <Shield className="w-6 h-6 text-indigo-600 mr-2" />
-                  <h4 className="font-semibold text-gray-900">Safety & Guidelines</h4>
+                  <h4 className="font-semibold text-gray-900">
+                    Safety & Guidelines
+                  </h4>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-center">

@@ -4,10 +4,7 @@ import {
   Search, ChevronRight, Star, TrendingUp, Shield, Clock,
   Car, Home, Hotel, Plane, MapPin 
 } from 'lucide-react';
-// Fixed import path - use one of these depending on your preference:
-import { services } from '@/data/sampleData';  // Relative path from src/pages/home/
-// OR use the path mapping:
-// import { services } from '@/data/sampleData';
+import { services } from "@/data/sampleData"; 
 
 const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');

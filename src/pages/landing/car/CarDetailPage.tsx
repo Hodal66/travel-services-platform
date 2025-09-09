@@ -1,20 +1,34 @@
-import React from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Star, Users, Settings, Fuel, MapPin, Shield, Phone, Calendar } from 'lucide-react';
-import { sampleCars } from '@/data/sampleData';
+import React from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  Star,
+  Users,
+  Settings,
+  Fuel,
+  MapPin,
+  Shield,
+  Phone,
+  Calendar,
+} from "lucide-react";
+import { sampleCars } from "@/data/sampleData";
 
 const CarDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
-  const car = sampleCars.find(c => c.id === id);
+
+  const car = sampleCars.find((c) => c.id === id);
 
   if (!car) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Car Not Found</h2>
-          <p className="text-gray-600 mb-6">The car you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Car Not Found
+          </h2>
+          <p className="text-gray-600 mb-6">
+            The car you're looking for doesn't exist.
+          </p>
           <Link
             to="/cars"
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
@@ -28,7 +42,7 @@ const CarDetailPage: React.FC = () => {
   }
 
   const handleBooking = () => {
-    alert('Booking functionality will be implemented with backend integration');
+    alert("Booking functionality will be implemented with backend integration");
   };
 
   return (
@@ -57,12 +71,16 @@ const CarDetailPage: React.FC = () => {
                   <h1 className="text-3xl font-bold text-gray-900">
                     {car.brand} {car.model}
                   </h1>
-                  <p className="text-gray-600">{car.year} • {car.location}</p>
+                  <p className="text-gray-600">
+                    {car.year} • {car.location}
+                  </p>
                 </div>
                 <div className="text-right">
                   <div className="flex items-center mb-2">
                     <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                    <span className="text-lg font-semibold ml-1">{car.rating}</span>
+                    <span className="text-lg font-semibold ml-1">
+                      {car.rating}
+                    </span>
                   </div>
                   <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
                     {car.category}
@@ -122,7 +140,9 @@ const CarDetailPage: React.FC = () => {
 
               {/* Features */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">Features & Amenities</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Features & Amenities
+                </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {car.features.map((feature, index) => (
                     <div key={index} className="flex items-center">
@@ -141,19 +161,27 @@ const CarDetailPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex justify-between py-2 border-b border-gray-200">
                     <span className="text-gray-600">Engine</span>
-                    <span className="font-medium">{car.specifications.engine}</span>
+                    <span className="font-medium">
+                      {car.specifications.engine}
+                    </span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-gray-200">
                     <span className="text-gray-600">Horsepower</span>
-                    <span className="font-medium">{car.specifications.horsepower}</span>
+                    <span className="font-medium">
+                      {car.specifications.horsepower}
+                    </span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-gray-200">
                     <span className="text-gray-600">Fuel Capacity</span>
-                    <span className="font-medium">{car.specifications.fuelCapacity}</span>
+                    <span className="font-medium">
+                      {car.specifications.fuelCapacity}
+                    </span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-gray-200">
                     <span className="text-gray-600">Baggage</span>
-                    <span className="font-medium">{car.specifications.baggage}</span>
+                    <span className="font-medium">
+                      {car.specifications.baggage}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -222,7 +250,7 @@ const CarDetailPage: React.FC = () => {
                 >
                   Book Now
                 </button>
-                
+
                 <button className="w-full flex items-center justify-center bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors duration-200 font-semibold">
                   <Phone className="mr-2 h-4 w-4" />
                   Call for Booking
@@ -231,8 +259,12 @@ const CarDetailPage: React.FC = () => {
 
               {/* Contact Info */}
               <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-                <p className="text-sm text-gray-600 mb-2">Need help with your booking?</p>
-                <p className="text-sm font-semibold text-blue-600">+1-800-CAR-RENT</p>
+                <p className="text-sm text-gray-600 mb-2">
+                  Need help with your booking?
+                </p>
+                <p className="text-sm font-semibold text-blue-600">
+                  +1-800-CAR-RENT
+                </p>
               </div>
             </div>
           </div>
